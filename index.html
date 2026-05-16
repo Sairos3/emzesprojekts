@@ -519,7 +519,7 @@
       #contact {
         scroll-margin-top: 100px;
       }
-      
+
       body {
         overflow-x: hidden;
       }
@@ -668,7 +668,23 @@
       }
 
       .info-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+      }
+
+      .info-card {
+        padding: 1rem 0.7rem;
+        min-height: auto;
+      }
+
+      .info-card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .info-card p {
+        font-size: 0.7rem;
+        line-height: 1.3;
       }
 
       .contact-box {
@@ -779,13 +795,12 @@
     </div>
 
     <div class="features">
-      <div class="feature"><div class="icon">✦</div>
-        <h3>Privāta vannas istaba</h3><p>Ērta un atsevišķa vannas istaba viesiem.</p>
-        <h3>Terase un dārzs</h3><p>Āra zona mierīgai atpūtai un brokastīm svaigā gaisā.</p>
-        <h3>Grila vieta</h3><p>Iespēja pagatavot maltīti ārā un baudīt vakaru.</p>
-        <h3>Karstā baļļa / džakuzi</h3><p>Relaksācijai pēc pastaigas vai garas dienas.</p>
-        <h3>Mājdzīvnieki atļauti</h3><p>Viesi var ierasties arī ar savu mīluli.</p>
-        <h3>Virtuves piederumi</h3><p>Pieejama tējkanna, ēdamgalds un nepieciešamie piederumi.</p>
+      <div class="feature"><div class="icon">✦</div><h3>Privāta vannas istaba</h3><p>Ērta un atsevišķa vannas istaba viesiem.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Terase un dārzs</h3><p>Āra zona mierīgai atpūtai un brokastīm svaigā gaisā.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Grila vieta</h3><p>Iespēja pagatavot maltīti ārā un baudīt vakaru.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Karstā baļļa / džakuzi</h3><p>Relaksācijai pēc pastaigas vai garas dienas.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Mājdzīvnieki atļauti</h3><p>Viesi var ierasties arī ar savu mīluli.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Virtuves piederumi</h3><p>Pieejama tējkanna, ēdamgalds un nepieciešamie piederumi.</p></div>
     </div>
   </section>
 
