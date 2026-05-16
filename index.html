@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kempings Emzē — Bertas Namiņš Gulbenē. Mājīga atpūtas mājiņa ar terasi, dārzu, grilu un karsto baļļu." />
+  <title>Kempings Emzē — Bertas Namiņš</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #f5efe3;
+      background: #161713;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 6vw;
+      background: rgba(22, 23, 19, 0.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(220, 190, 130, 0.16);
+    }
+
+    .logo {
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #d7b46a;
+    }
+
+    .topbar nav {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .topbar nav a {
+      color: #f5efe3;
+      opacity: 0.82;
+    }
+
+    .topbar nav a:hover {
+      color: #d7b46a;
+      opacity: 1;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+      padding-top: 76px;
+      background: radial-gradient(circle at top left, #2b3025, #161713 55%);
+    }
+
+    .hero-text {
+      padding: 8vw 6vw 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      color: #d7b46a;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+      max-width: 850px;
+    }
+
+    .hero-text p {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      max-width: 620px;
+      color: #d8d0c1;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-image {
+      min-height: 520px;
+      background: linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.18)), url('images/hero.jpeg') center/cover no-repeat;
+      border-left: 1px solid rgba(220, 190, 130, 0.14);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.9rem 1.5rem;
+      border-radius: 0;
+      border: 1px solid #d7b46a;
+      background: #d7b46a;
+      color: #161713;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+    }
+
+    .btn.outline {
+      background: transparent;
+      color: #d7b46a;
+    }
+
+    section {
+      padding: 6rem 6vw;
+    }
+
+    .section-light {
+      background: #f3eadc;
+      color: #1d211a;
+    }
+
+    .section-dark {
+      background: #161713;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      color: inherit;
+      opacity: 0.76;
+      font-size: 1.08rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .photo-block {
+      min-height: 540px;
+      background: #2c2d27 url('images/house.jpeg') center/cover no-repeat;
+      position: relative;
+    }
+
+    .photo-block::after {
+      content: '';
+      position: absolute;
+      inset: 24px;
+      border: 1px solid rgba(215, 180, 106, 0.65);
+      pointer-events: none;
+    }
+
+    .text-card {
+      background: #ffffff;
+      color: #1d211a;
+      padding: clamp(2rem, 5vw, 4rem);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.16);
+    }
+
+    .text-card h2 {
+      color: #1d211a;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    .text-card p {
+      color: #4b4b41;
+      margin-bottom: 1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(215, 180, 106, 0.25);
+      margin-top: 2rem;
+    }
+
+    .stat {
+      background: #1d211a;
+      padding: 1.8rem;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: #d7b46a;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 0.5rem;
+      color: #e5dccd;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .feature {
+      background: #22251f;
+      border: 1px solid rgba(215, 180, 106, 0.18);
+      padding: 2rem;
+      min-height: 150px;
+    }
+
+    .feature .icon {
+      color: #d7b46a;
+      font-size: 1.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature p {
+      color: #cfc7b8;
+      font-size: 0.95rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      grid-auto-rows: 260px;
+      gap: 1rem;
+    }
+
+    .gallery div {
+      background: #c8bfae center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery div {
+      background-color: #c8bfae;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery .photo1 { background-image: url('images/photo1.jpeg'); grid-row: span 2; }
+    .gallery .photo2 { background-image: url('images/photo2.jpeg'); }
+    .gallery .photo3 { background-image: url('images/photo3.jpeg'); }
+    .gallery .photo4 { background-image: url('images/photo4.jpeg'); grid-column: span 2; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .info-card {
+      background: #ffffff;
+      color: #1d211a;
+      padding: 2rem;
+      border-left: 5px solid #d7b46a;
+      min-height: 190px;
+    }
+
+    .info-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-card p {
+      color: #4b4b41;
+    }
+
+    .contact-section {
+      background: linear-gradient(rgba(22,23,19,0.80), rgba(22,23,19,0.88)), url('images/contact.jpeg') center/cover no-repeat;
+      text-align: center;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-box {
+      max-width: 760px;
+      margin: auto;
+      padding: 4rem 2rem;
+      border: 1px solid rgba(215, 180, 106, 0.42);
+      background: rgba(22, 23, 19, 0.74);
+    }
+
+    .contact-box h2 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box p {
+      color: #d8d0c1;
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #0f100d;
+      color: #cfc7b8;
+      border-top: 1px solid rgba(215, 180, 106, 0.18);
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        position: static;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .topbar nav {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 0;
+      }
+
+      .hero-image {
+        min-height: 420px;
+        border-left: none;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
+      }
+
+      .photo1,
+      .photo4 {
+        grid-row: auto;
+        grid-column: auto;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="#top">Bertas Namiņš</a>
+    <nav>
+      <a href="#about">Par namiņu</a>
+      <a href="#amenities">Ērtības</a>
+      <a href="#gallery">Galerija</a>
+      <a href="#location">Info</a>
+      <a href="#contact">Kontakti</a>
+    </nav>
+  </div>
+
+  <header id="top" class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">Kempings Emzē · Gulbene</div>
+      <h1>Bertas Namiņš</h1>
+      <p>Mājīga atpūtas mājiņa Gulbenē mierīgai nakšņošanai pie dabas, ar terasi, dārzu, grilu un karsto baļļu.</p>
+      <div class="button-group">
+        <a class="btn" href="#contact">Rezervēt</a>
+        <a class="btn outline" href="#about">Apskatīt namiņu</a>
+      </div>
+    </div>
+    <div class="hero-image" aria-label="Bertas Namiņa galvenais foto"></div>
+  </header>
+
+  <section id="about" class="section-light">
+    <div class="split">
+      <div class="photo-block" aria-label="Atpūtas namiņa foto"></div>
+      <div class="text-card">
+        <div class="eyebrow">Par mums</div>
+        <h2>Miers, daba un omulīga nakšņošana</h2>
+        <p>
+          Bertas Namiņš ir neliela un omulīga atpūtas mājiņa Gulbenē, piemērota mierīgai atpūtai divatā vai vienam ceļotājam.
+          Šeit var baudīt klusumu, svaigu gaisu un nesteidzīgu atpūtu Emzes apkārtnē.
+        </p>
+        <p>
+          Namiņā pieejama atsevišķa guļamistaba, privāta vannas istaba un atpūtas zona. Ārā viesiem pieejama terase,
+          dārza zona, āra mēbeles un grila vieta.
+        </p>
+        <div class="stats">
+          <div class="stat"><strong>22 m²</strong><span>Namiņa platība</span></div>
+          <div class="stat"><strong>1</strong><span>Guļamistaba</span></div>
+          <div class="stat"><strong>12:00</strong><span>Izrakstīšanās</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="amenities" class="section-dark">
+    <div class="section-title">
+      <div class="eyebrow">Ērtības</div>
+      <h2>Viss nesteidzīgai atpūtai</h2>
+      <p>Vienkāršas, praktiskas un patīkamas ērtības nedēļas nogalei vai īsai atpūtai Gulbenē.</p>
+    </div>
+
+    <div class="features">
+      <div class="feature"><div class="icon">✦</div><h3>Privāta vannas istaba</h3><p>Ērta un atsevišķa vannas istaba viesiem.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Terase un dārzs</h3><p>Āra zona mierīgai atpūtai un brokastīm svaigā gaisā.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Grila vieta</h3><p>Iespēja pagatavot maltīti ārā un baudīt vakaru.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Karstā baļļa / džakuzi</h3><p>Relaksācijai pēc pastaigas vai garas dienas.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Mājdzīvnieki atļauti</h3><p>Viesi var ierasties arī ar savu mīluli.</p></div>
+      <div class="feature"><div class="icon">✦</div><h3>Virtuves piederumi</h3><p>Pieejama tējkanna, ēdamgalds un nepieciešamie piederumi.</p></div>
+    </div>
+  </section>
+
+  <section id="gallery" class="section-light">
+    <div class="section-title">
+      <div class="eyebrow">Galerija</div>
+      <h2>Apskati namiņu</h2>
+    </div>
+
+    <div class="gallery">
+      <div class="photo1" aria-label="Galerijas foto 1"></div>
+      <div class="photo2" aria-label="Galerijas foto 2"></div>
+      <div class="photo3" aria-label="Galerijas foto 3"></div>
+      <div class="photo4" aria-label="Galerijas foto 4"></div>
+    </div>
+  </section>
+
+  <section id="location" class="section-dark">
+    <div class="section-title">
+      <div class="eyebrow">Informācija</div>
+      <h2>Rezervācijas detaļas</h2>
+      <p>Svarīgākā informācija pirms ierašanās.</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Adrese</h3>
+        <p>Emzes iela 15, Gulbene, LV-4401, Latvija</p>
+      </div>
+      <div class="info-card">
+        <h3>Ierašanās</h3>
+        <p>Ierašanās: no 15:00</p>
+        <p>Izrakstīšanās: līdz 12:00</p>
+      </div>
+      <div class="info-card">
+        <h3>Cena</h3>
+        <p>No €___ par nakti.</p>
+        <p>Lai uzzinātu precīzu cenu un pieejamību, sazinieties ar mums.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-box">
+      <div class="eyebrow">Rezervācija</div>
+      <h2>Vēlies pavadīt nedēļas nogali Emzē?</h2>
+      <p>Sazinieties ar mums, lai pārbaudītu pieejamību un rezervētu Bertas Namiņu.</p>
+      <div class="button-group" style="justify-content:center;">
+        <a class="btn" href="tel:+37100000000">Zvanīt</a>
+        <a class="btn outline" href="mailto:info@example.com">E-pasts</a>
+        <a class="btn outline" href="https://wa.me/37100000000">WhatsApp</a>
+      </div>
+      <br />
+      <p>Tālrunis: +371 00000000 · E-pasts: info@example.com</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Kempings Emzē — Bertas Namiņš. Visas tiesības aizsargātas.</p>
+  </footer>
+</body>
+</html>
