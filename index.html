@@ -509,15 +509,106 @@
       border-top: 1px solid rgba(215, 180, 106, 0.18);
     }
 
+    .cabin-details {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-top: 0;
+      transition: 0.45s ease;
+    }
+
+    .cabin-details.active {
+      max-height: 600px;
+      opacity: 1;
+      margin-top: 2rem;
+    }
+
+    .cabin-main-content.hidden {
+        display: none;
+    }
+
+    .details-tabs {
+      display: flex;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .tab-btn {
+      padding: 0.7rem 1.2rem;
+      border: 1px solid #d7b46a;
+      background: transparent;
+      color: #d7b46a;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tab-btn.active {
+      background: #d7b46a;
+      color: #161713;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .mini-gallery {
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .mini-gallery-image {
+      min-height: 260px;
+      background: url('images/photo1.jpeg') center/cover no-repeat;
+      border: 1px solid rgba(215, 180, 106, 0.35);
+    }
+
+    .mini-gallery-btn {
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #d7b46a;
+      background: rgba(22, 23, 19, 0.85);
+      color: #d7b46a;
+      cursor: pointer;
+    }
+
+    .details-header {
+      text-align: center;
+
+      color: #d7b46a;
+
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+      font-size: 0.85rem;
+
+      margin-bottom: 1.5rem;
+
+      opacity: 0.9;
+    }
+
+    .details-tabs {
+      display: flex;
+      justify-content: center;
+
+      gap: 0.8rem;
+
+      margin: 1.2rem 0 2rem;
+    }
+
     @media (max-width: 900px) {
       #welcome,
       #top,
-      #about,
       #amenities,
-      #gallery,
       #location,
       #contact {
-        scroll-margin-top: 100px;
+        scroll-margin-top: 82px;
       }
 
       body {
@@ -724,9 +815,7 @@
 
     <nav>
       <a href="#top">Namiņi</a>
-      <a href="#about">Par namiņu</a>
       <a href="#amenities">Ērtības</a>
-      <a href="#gallery">Galerija</a>
       <a href="#location">Info</a>
       <a href="#contact">Kontakti</a>
     </nav>
@@ -737,7 +826,6 @@
         <div class="eyebrow">Laipni lūgti Kempingā Emzē</div>
         <h1>Atpūta pie dabas Gulbenē</h1>
         <p>Mājīgi namiņi mierīgai atpūtai, nedēļas nogalei un nesteidzīgiem vakariem svaigā gaisā.</p>
-        <a class="btn" href="#contact">Rezervēt namiņu</a>
       </div>
     </div>
   </section>
@@ -745,16 +833,73 @@
     <button class="slider-btn prev">←</button>
     <button class="slider-btn next">→</button>
 
-    <div class="cabin-slide active">
-      <div class="cabin-info" style="--cabin-bg: url('images/hero.jpeg');">
-        <div class="eyebrow">Kempings Emzē · Gulbene</div>
-        <h1>Bertas Namiņš</h1>
-        <p>Mājīga atpūtas mājiņa Gulbenē mierīgai nakšņošanai pie dabas, ar terasi, dārzu, grilu un karsto baļļu.</p>
-        <div class="button-group">
-          <a class="btn" href="#contact">Rezervēt</a>
-          <a class="btn outline" href="#about">Apskatīt namiņu</a>
+      <div class="cabin-slide active">
+        <div class="cabin-info" style="--cabin-bg: url('images/hero.jpeg');">
+
+          <div class="cabin-main-content">
+            <div class="eyebrow">Kempings Emzē · Gulbene</div>
+
+            <h1>Bertas Namiņš</h1>
+
+            <p>
+              Mājīga atpūtas mājiņa Gulbenē mierīgai nakšņošanai pie dabas,
+              ar terasi, dārzu, grilu un karsto baļļu.
+            </p>
+
+            <div class="button-group">
+              <a class="btn" href="#contact">Rezervēt</a>
+
+              <button class="btn outline" type="button" onclick="toggleCabinDetails()">
+                Apskatīt namiņu
+              </button>
+            </div>
+          </div>
+
+          <div class="cabin-details" id="cabinDetails">
+            <div class="details-header">
+              Kempings Emzē · Gulbene · Bertas Namiņš
+            </div>
+            <div class="stats">
+              <div class="stat"><strong>22 m²</strong><span>Namiņa platība</span></div>
+              <div class="stat"><strong>1</strong><span>Guļamistaba</span></div>
+              <div class="stat"><strong>12:00</strong><span>Izrakstīšanās</span></div>
+            </div>
+
+            <div class="details-tabs">
+              <button class="tab-btn" type="button" onclick="closeCabinDetails()">
+                Bertas Namiņš
+              </button>
+
+              <button class="tab-btn active" type="button" onclick="showCabinTab('info')">
+                Info
+              </button>
+
+              <button class="tab-btn" type="button" onclick="showCabinTab('gallery')">
+                Galerija
+              </button>
+            </div>
+
+            <div id="infoTab" class="tab-content active">
+              <p>
+                Bertas Namiņš ir neliela un omulīga atpūtas mājiņa Gulbenē,
+                piemērota mierīgai atpūtai divatā vai vienam ceļotājam.
+              </p>
+
+              <p>
+                Pieejama terase, grils, dārzs un karstā baļļa relaksējošai atpūtai.
+              </p>
+            </div>
+
+            <div id="galleryTab" class="tab-content">
+              <div class="mini-gallery">
+                <button class="mini-gallery-btn" type="button" onclick="changeCabinPhoto(-1)">←</button>
+                <div id="cabinGalleryImage" class="mini-gallery-image"></div>
+                <button class="mini-gallery-btn" type="button" onclick="changeCabinPhoto(1)">→</button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
       <div class="cabin-preview" style="--preview-bg: url('images/updating.jpeg');">
         <div class="eyebrow">Drīzumā</div>
         <h2>Updating namiņš</h2>
@@ -785,29 +930,6 @@
     </div>
   </header>
 
-  <section id="about" class="section-light">
-    <div class="split">
-      <div class="photo-block" aria-label="Atpūtas namiņa foto"></div>
-      <div class="text-card">
-        <div class="eyebrow">Par mums</div>
-        <h2>Miers, daba un omulīga nakšņošana</h2>
-        <p>
-          Bertas Namiņš ir neliela un omulīga atpūtas mājiņa Gulbenē, piemērota mierīgai atpūtai divatā vai vienam ceļotājam.
-          Šeit var baudīt klusumu, svaigu gaisu un nesteidzīgu atpūtu Emzes apkārtnē.
-        </p>
-        <p>
-          Namiņā pieejama atsevišķa guļamistaba, privāta vannas istaba un atpūtas zona. Ārā viesiem pieejama terase,
-          dārza zona, āra mēbeles un grila vieta.
-        </p>
-        <div class="stats">
-          <div class="stat"><strong>22 m²</strong><span>Namiņa platība</span></div>
-          <div class="stat"><strong>1</strong><span>Guļamistaba</span></div>
-          <div class="stat"><strong>12:00</strong><span>Izrakstīšanās</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="amenities" class="section-dark">
     <div class="section-title">
       <div class="eyebrow">Ērtības</div>
@@ -816,26 +938,10 @@
     </div>
 
     <div class="features">
-      <div class="feature"><div class="icon">✦</div><h3>Privāta vannas istaba</h3><p>Ērta un atsevišķa vannas istaba viesiem.</p></div>
-      <div class="feature"><div class="icon">✦</div><h3>Terase un dārzs</h3><p>Āra zona mierīgai atpūtai un brokastīm svaigā gaisā.</p></div>
       <div class="feature"><div class="icon">✦</div><h3>Grila vieta</h3><p>Iespēja pagatavot maltīti ārā un baudīt vakaru.</p></div>
       <div class="feature"><div class="icon">✦</div><h3>Karstā baļļa / džakuzi</h3><p>Relaksācijai pēc pastaigas vai garas dienas.</p></div>
       <div class="feature"><div class="icon">✦</div><h3>Mājdzīvnieki atļauti</h3><p>Viesi var ierasties arī ar savu mīluli.</p></div>
       <div class="feature"><div class="icon">✦</div><h3>Virtuves piederumi</h3><p>Pieejama tējkanna, ēdamgalds un nepieciešamie piederumi.</p></div>
-    </div>
-  </section>
-
-  <section id="gallery" class="section-light">
-    <div class="section-title">
-      <div class="eyebrow">Galerija</div>
-      <h2>Apskati namiņu</h2>
-    </div>
-
-    <div class="gallery">
-      <div class="photo1" aria-label="Galerijas foto 1"></div>
-      <div class="photo2" aria-label="Galerijas foto 2"></div>
-      <div class="photo3" aria-label="Galerijas foto 3"></div>
-      <div class="photo4" aria-label="Galerijas foto 4"></div>
     </div>
   </section>
 
@@ -908,6 +1014,46 @@
     dots.forEach((dot, i) => {
       dot.addEventListener('click', () => showSlide(i));
     });
+
+    function toggleCabinDetails() {
+      const details = document.getElementById('cabinDetails');
+      const mainContent = document.querySelector('.cabin-main-content');
+
+      details.classList.toggle('active');
+      mainContent.classList.toggle('hidden');
+    }
+
+    const cabinPhotos = [
+      'images/photo1.jpeg',
+      'images/photo2.jpeg',
+      'images/photo3.jpeg',
+      'images/photo4.jpeg'
+    ];
+
+    let currentCabinPhoto = 0;
+
+    function showCabinTab(tab) {
+      document.getElementById('infoTab').classList.toggle('active', tab === 'info');
+      document.getElementById('galleryTab').classList.toggle('active', tab === 'gallery');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      event.target.classList.add('active');
+    }
+
+    function closeCabinDetails() {
+      document.getElementById('cabinDetails').classList.remove('active');
+      document.querySelector('.cabin-main-content').classList.remove('hidden');
+    }
+
+    function changeCabinPhoto(direction) {
+      currentCabinPhoto = (currentCabinPhoto + direction + cabinPhotos.length) % cabinPhotos.length;
+
+      document.getElementById('cabinGalleryImage').style.backgroundImage =
+        `url('${cabinPhotos[currentCabinPhoto]}')`;
+    }
   </script>
 </body>
 </html>
