@@ -16,7 +16,7 @@
     html {
       scroll-behavior: smooth;
     }
-
+    
     body {
       font-family: Arial, Helvetica, sans-serif;
       color: #f5efe3;
@@ -510,7 +510,16 @@
     }
 
     @media (max-width: 900px) {
-
+      #welcome,
+      #top,
+      #about,
+      #amenities,
+      #gallery,
+      #location,
+      #contact {
+        scroll-margin-top: 100px;
+      }
+      
       body {
         overflow-x: hidden;
       }
@@ -535,6 +544,11 @@
         flex-wrap: wrap;
         gap: 0.8rem;
         font-size: 0.75rem;
+      }
+
+      .welcome-hero {
+        min-height: 100vh;
+        padding-top: 120px;
       }
 
       .hero {
@@ -669,8 +683,10 @@
 </head>
 <body>
   <div class="topbar">
-    <a class="logo" href="#top">Kempings Emzē</a>
+    <a class="logo" href="#welcome">Kempings Emzē</a>
+
     <nav>
+      <a href="#top">Namiņi</a>
       <a href="#about">Par namiņu</a>
       <a href="#amenities">Ērtības</a>
       <a href="#gallery">Galerija</a>
@@ -678,7 +694,7 @@
       <a href="#contact">Kontakti</a>
     </nav>
   </div>
-  <section class="welcome-hero">
+  <section id="welcome" class="welcome-hero">
     <div class="welcome-overlay">
       <div class="welcome-content">
         <div class="eyebrow">Laipni lūgti Kempingā Emzē</div>
