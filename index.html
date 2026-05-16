@@ -548,6 +548,70 @@
       margin: 1.2rem 0 2rem;
     }
 
+    .trail-section {
+      background: linear-gradient(rgba(22,23,19,0.86), rgba(22,23,19,0.92)), url('images/trails.jpeg') center/cover no-repeat;
+      padding: 6rem 6vw;
+    }
+
+    .trail-card {
+      max-width: 980px;
+      margin: auto;
+      padding: clamp(2rem, 5vw, 4rem);
+      border: 1px solid rgba(215, 180, 106, 0.35);
+      background: rgba(22, 23, 19, 0.72);
+    }
+
+    .trail-card h2 {
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    .trail-card p {
+      color: #d8d0c1;
+      max-width: 760px;
+      margin-bottom: 1.5rem;
+    }
+
+    .trail-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 2rem 0;
+    }
+
+    .trail-content {
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .trail-info {
+      background: #1d211a;
+      border: 1px solid rgba(215, 180, 106, 0.25);
+      padding: 2rem;
+    }
+
+    .trail-info h3 {
+      color: #d7b46a;
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .trail-image {
+      min-height: 320px;
+      margin-bottom: 1.5rem;
+
+      background-image: url('images/trail-heinrich.jpeg');
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      background-color: #161713;
+      border: 1px solid rgba(215, 180, 106, 0.35);
+    }
+
     @media (max-width: 900px) {
       #welcome,
       #top,
@@ -752,6 +816,30 @@
       section {
         padding: 4rem 1.2rem;
       }
+
+      .trail-section {
+        padding: 4rem 1.2rem;
+      }
+
+      .trail-tabs {
+        flex-direction: column;
+      }
+
+      .trail-content {
+        grid-template-columns: 38px 1fr 38px;
+      }
+
+      .trail-info {
+        padding: 1.2rem;
+      }
+
+      .trail-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trail-image {
+        min-height: 240px;
+      }
     }
   </style>
 </head>
@@ -764,6 +852,7 @@
       <a href="#amenities">Ērtības</a>
       <a href="#location">Info</a>
       <a href="#contact">Kontakti</a>
+      <a href="#trails">Velo trases</a>
     </nav>
   </div>
   <section id="welcome" class="welcome-hero">
@@ -1022,6 +1111,55 @@
     </div>
   </section>
 
+  <section id="trails" class="trail-section">
+    <div class="trail-card">
+      <div class="eyebrow">Emzes parks · Gulbene</div>
+      <h2>Velo trases un pastaigu maršruti</h2>
+
+      <p>
+        Emzes parks ir viena no senākajām īpaši aizsargājamām dabas teritorijām Latvijā.
+        Parkā pieejamas 3 marķētas tematiskās trases, kas savieno Emzes parku ar Spārītes parku.
+      </p>
+
+      <div class="trail-tabs">
+        <button class="tab-btn active" type="button" onclick="showTrail(0)">Heinriha trase</button>
+        <button class="tab-btn" type="button" onclick="showTrail(1)">Marisas trase</button>
+        <button class="tab-btn" type="button" onclick="showTrail(2)">Šveicera trase</button>
+      </div>
+
+      <div class="trail-content">
+        <button class="mini-gallery-btn" type="button" onclick="changeTrail(-1)">←</button>
+
+        <div class="trail-info">
+          <div id="trailImage" class="trail-image"></div>
+
+          <h3 id="trailTitle">Heinriha trase</h3>
+
+          <div class="trail-stats">
+            <div><span>Garums: </span><strong id="trailLength">3,2 km</strong></div>
+            <div><span>Ilgums: </span><strong id="trailDuration">1 h</strong></div>
+            <div><span>Tips: </span><strong id="trailType">Lineāra</strong></div>
+            <div><span>Marķējums: </span><strong id="trailMarking">H · sarkana</strong></div>
+          </div>
+
+          <p id="trailText">
+            Heinriha trase ir piemērota mierīgam izbraucienam vai pastaigai Emzes parka apkārtnē.
+          </p>
+
+          <a
+            class="btn outline"
+            href="https://www.google.com/maps/d/u/0/viewer?mid=1hhhJH4H1J2X4ROImrxrcpOUUKVgZWBm_&ll=57.17867863080035%2C26.7804549142136&z=15"
+            target="_blank"
+          >
+            Atvērt trases karti
+          </a>
+        </div>
+
+        <button class="mini-gallery-btn" type="button" onclick="changeTrail(1)">→</button>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>© 2026 Kempings Emzē — Bertas Namiņš. Visas tiesības aizsargātas.</p>
   </footer>
@@ -1094,12 +1232,67 @@
       document.getElementById('updatingDetails').classList.remove('active');
       document.querySelector('.updating-main-content').classList.remove('hidden');
     }
-    
+
     function changeCabinPhoto(direction) {
       currentCabinPhoto = (currentCabinPhoto + direction + cabinPhotos.length) % cabinPhotos.length;
 
       document.getElementById('cabinGalleryImage').style.backgroundImage =
         `url('${cabinPhotos[currentCabinPhoto]}')`;
+    }
+
+    const trails = [
+      {
+        title: 'Heinriha trase',
+        length: '3,2 km',
+        duration: '1 h',
+        type: 'Lineāra',
+        marking: 'H · sarkana krāsa',
+        text: 'Heinriha trase ir piemērota mierīgam izbraucienam vai pastaigai Emzes parka apkārtnē.',
+        photo: 'images/trail-heinrich.jpeg'
+      },
+      {
+        title: 'Marisas trase',
+        length: '2,2 km',
+        duration: '40 min',
+        type: 'Apļveida',
+        marking: 'M · dzeltena krāsa',
+        text: 'Marisas trase ved cauri ainaviskai parka teritorijai un ir ērta īsākai pastaigai vai velo izbraucienam.',
+        photo: 'images/trail-marisa.jpeg'
+      },
+      {
+        title: 'Svētezera trase',
+        length: '2,6 km',
+        duration: '30 min',
+        type: 'Lineāra',
+        marking: 'S · oranža krāsa',
+        text: 'Svētezera trase ir īsāks maršruts dabas baudīšanai un nesteidzīgai atpūtai pie parka apkārtnes.',
+        photo: 'images/trail-svetezers.jpeg'
+      }
+    ];
+
+    let currentTrail = 0;
+
+    function showTrail(index) {
+      currentTrail = index;
+
+      const trail = trails[currentTrail];
+
+      document.getElementById('trailTitle').textContent = trail.title;
+      document.getElementById('trailLength').textContent = trail.length;
+      document.getElementById('trailDuration').textContent = trail.duration;
+      document.getElementById('trailType').textContent = trail.type;
+      document.getElementById('trailMarking').textContent = trail.marking;
+      document.getElementById('trailText').textContent = trail.text;
+      document.getElementById('trailImage').style.backgroundImage = `url('${trail.photo}')`;
+
+      document.querySelectorAll('.trail-tabs .tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === currentTrail);
+      });
+    }
+
+    function changeTrail(direction) {
+      currentTrail = (currentTrail + direction + trails.length) % trails.length;
+      showTrail(currentTrail);
     }
   </script>
 </body>
