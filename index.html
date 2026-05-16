@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kempings Emzē — Bertas Namiņš Gulbenē. Mājīga atpūtas mājiņa ar terasi, dārzu, grilu un karsto baļļu." />
-  <title>Kempings Emzē — Bertas Namiņš</title>
+  <meta name="description" content="Kempings Emzē — Bertas Namiņš Gulbenē. Mājīgas atpūtas mājiņas ar terasi, dārzu, grilu un karsto baļļu." />
+  <title>Kempings Emzē — Atpūtas namiņi</title>
   <style>
     * {
       box-sizing: border-box;
@@ -76,18 +76,66 @@
 
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: stretch;
       padding-top: 76px;
       background: radial-gradient(circle at top left, #2b3025, #161713 55%);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-text {
+    .cabin-slide {
+      display: none;
+      min-height: calc(100vh - 76px);
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .cabin-slide.active {
+      display: grid;
+    }
+
+    .cabin-info {
       padding: 8vw 6vw 5vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(22,23,19,0.78), rgba(22,23,19,0.88)), var(--cabin-bg) center/cover no-repeat;
+    }
+
+    .cabin-info::after {
+      content: '';
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(215, 180, 106, 0.35);
+      pointer-events: none;
+    }
+
+    .cabin-info > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cabin-preview {
+      min-height: 520px;
+      padding: 7vw 6vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(rgba(0,0,0,0.16), rgba(0,0,0,0.72)), var(--preview-bg) center/cover no-repeat;
+      border-left: 1px solid rgba(220, 190, 130, 0.14);
+    }
+
+    .cabin-preview h2 {
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      line-height: 0.95;
+      margin-bottom: 1rem;
+    }
+
+    .cabin-preview p {
+      max-width: 520px;
+      color: #e8dfd1;
+      font-size: 1.1rem;
     }
 
     .eyebrow {
@@ -106,17 +154,62 @@
       max-width: 850px;
     }
 
-    .hero-text p {
+    .cabin-info p {
       font-size: clamp(1.05rem, 2vw, 1.3rem);
       max-width: 620px;
       color: #d8d0c1;
       margin-bottom: 2.2rem;
     }
 
-    .hero-image {
-      min-height: 520px;
-      background: linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.18)), url('images/hero.jpeg') center/cover no-repeat;
-      border-left: 1px solid rgba(220, 190, 130, 0.14);
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid rgba(215, 180, 106, 0.7);
+      background: rgba(22, 23, 19, 0.75);
+      color: #d7b46a;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .slider-btn:hover {
+      background: #d7b46a;
+      color: #161713;
+    }
+
+    .slider-btn.prev {
+      left: 24px;
+    }
+
+    .slider-btn.next {
+      right: 24px;
+    }
+
+    .slide-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      z-index: 12;
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(215,180,106,0.6);
+    }
+
+    .dot.active {
+      background: #d7b46a;
     }
 
     .button-group {
@@ -289,18 +382,19 @@
     }
 
     .gallery div {
-      background: #c8bfae center/cover no-repeat;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gallery div {
       background-color: #c8bfae;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
       position: relative;
       overflow: hidden;
+    }
+
+    .gallery div::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.25), transparent 60%);
     }
 
     .gallery .photo1 { background-image: url('images/photo1.jpeg'); grid-row: span 2; }
@@ -380,13 +474,30 @@
       }
 
       .hero {
-        grid-template-columns: 1fr;
         padding-top: 0;
       }
 
-      .hero-image {
-        min-height: 420px;
-        border-left: none;
+      .cabin-slide.active {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .cabin-info,
+      .cabin-preview {
+        min-height: 520px;
+      }
+
+      .slider-btn {
+        top: auto;
+        bottom: 24px;
+      }
+
+      .slider-btn.prev {
+        left: 20px;
+      }
+
+      .slider-btn.next {
+        right: 20px;
       }
 
       .split {
@@ -398,8 +509,8 @@
         grid-auto-rows: 240px;
       }
 
-      .photo1,
-      .photo4 {
+      .gallery .photo1,
+      .gallery .photo4 {
         grid-row: auto;
         grid-column: auto;
       }
@@ -412,7 +523,7 @@
 </head>
 <body>
   <div class="topbar">
-    <a class="logo" href="#top">Bertas Namiņš</a>
+    <a class="logo" href="#top">Kempings Emzē</a>
     <nav>
       <a href="#about">Par namiņu</a>
       <a href="#amenities">Ērtības</a>
@@ -423,16 +534,47 @@
   </div>
 
   <header id="top" class="hero">
-    <div class="hero-text">
-      <div class="eyebrow">Kempings Emzē · Gulbene</div>
-      <h1>Bertas Namiņš</h1>
-      <p>Mājīga atpūtas mājiņa Gulbenē mierīgai nakšņošanai pie dabas, ar terasi, dārzu, grilu un karsto baļļu.</p>
-      <div class="button-group">
-        <a class="btn" href="#contact">Rezervēt</a>
-        <a class="btn outline" href="#about">Apskatīt namiņu</a>
+    <button class="slider-btn prev" type="button" aria-label="Iepriekšējais namiņš">‹</button>
+    <button class="slider-btn next" type="button" aria-label="Nākamais namiņš">›</button>
+
+    <div class="cabin-slide active">
+      <div class="cabin-info" style="--cabin-bg: url('images/hero.jpeg');">
+        <div class="eyebrow">Kempings Emzē · Gulbene</div>
+        <h1>Bertas Namiņš</h1>
+        <p>Mājīga atpūtas mājiņa Gulbenē mierīgai nakšņošanai pie dabas, ar terasi, dārzu, grilu un karsto baļļu.</p>
+        <div class="button-group">
+          <a class="btn" href="#contact">Rezervēt</a>
+          <a class="btn outline" href="#about">Apskatīt namiņu</a>
+        </div>
+      </div>
+      <div class="cabin-preview" style="--preview-bg: url('images/updating.jpeg');">
+        <div class="eyebrow">Drīzumā</div>
+        <h2>Updating namiņš</h2>
+        <p>Šeit būs informācija par nākamo atpūtas namiņu. Pagaidām izmantojam darba nosaukumu, kamēr sadaļa tiek papildināta.</p>
       </div>
     </div>
-    <div class="hero-image" aria-label="Bertas Namiņa galvenais foto"></div>
+
+    <div class="cabin-slide">
+      <div class="cabin-info" style="--cabin-bg: url('images/updating.jpeg');">
+        <div class="eyebrow">Kempings Emzē · Jauns namiņš</div>
+        <h1>Updating namiņš</h1>
+        <p>Šī sadaļa ir sagatavota nākamajam namiņam. Te vēlāk varēs pievienot aprakstu, cenu, ērtības, foto un rezervācijas informāciju.</p>
+        <div class="button-group">
+          <a class="btn" href="#contact">Jautāt par pieejamību</a>
+          <a class="btn outline" href="#gallery">Skatīt galeriju</a>
+        </div>
+      </div>
+      <div class="cabin-preview" style="--preview-bg: url('images/hero.jpeg');">
+        <div class="eyebrow">Pieejams</div>
+        <h2>Bertas Namiņš</h2>
+        <p>Mājīga atpūtas mājiņa ar terasi, dārzu, grilu un karsto baļļu mierīgai atpūtai Gulbenē.</p>
+      </div>
+    </div>
+
+    <div class="slide-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+    </div>
   </header>
 
   <section id="about" class="section-light">
@@ -532,5 +674,32 @@
   <footer>
     <p>© 2026 Kempings Emzē — Bertas Namiņš. Visas tiesības aizsargātas.</p>
   </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.cabin-slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+    const nextBtn = document.querySelector('.slider-btn.next');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => showSlide(i));
+    });
+  </script>
 </body>
 </html>
