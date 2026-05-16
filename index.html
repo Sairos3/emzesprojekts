@@ -163,16 +163,28 @@
 
     .slider-btn {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
+
+      top: 104px;
+      z-index: 30;
+
       width: 54px;
       height: 54px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       border-radius: 50%;
       border: 1px solid rgba(215, 180, 106, 0.7);
-      background: rgba(22, 23, 19, 0.75);
+
+      background: rgba(22, 23, 19, 0.82);
+
       color: #d7b46a;
-      font-size: 2rem;
+
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1;
+
       cursor: pointer;
       transition: 0.2s ease;
     }
@@ -183,11 +195,11 @@
     }
 
     .slider-btn.prev {
-      left: 24px;
+      left: 34px;
     }
 
     .slider-btn.next {
-      right: 24px;
+      right: 34px;
     }
 
     .slide-dots {
@@ -607,8 +619,8 @@
   </div>
 
   <header id="top" class="hero">
-    <button class="slider-btn prev" type="button" aria-label="Iepriekšējais namiņš">‹</button>
-    <button class="slider-btn next" type="button" aria-label="Nākamais namiņš">›</button>
+    <button class="slider-btn prev">←</button>
+    <button class="slider-btn next">→</button>
 
     <div class="cabin-slide active">
       <div class="cabin-info" style="--cabin-bg: url('images/hero.jpeg');">
