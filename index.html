@@ -29,11 +29,6 @@
       text-decoration: none;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
     .topbar {
       position: fixed;
       top: 0;
@@ -297,11 +292,6 @@
       padding: 6rem 6vw;
     }
 
-    .section-light {
-      background: #f3eadc;
-      color: #1d211a;
-    }
-
     .section-dark {
       background: #161713;
     }
@@ -328,20 +318,6 @@
       grid-template-columns: 0.85fr 1.15fr;
       gap: 3rem;
       align-items: center;
-    }
-
-    .photo-block {
-      min-height: 540px;
-      background: #2c2d27 url('images/house.jpeg') center/cover no-repeat;
-      position: relative;
-    }
-
-    .photo-block::after {
-      content: '';
-      position: absolute;
-      inset: 24px;
-      border: 1px solid rgba(215, 180, 106, 0.65);
-      pointer-events: none;
     }
 
     .text-card {
@@ -420,39 +396,11 @@
     .feature h3:not(:first-of-type) {
       margin-top: 1rem;
     }
-    
+
     .feature p {
       color: #cfc7b8;
       font-size: 0.95rem;
     }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr 1fr;
-      grid-auto-rows: 260px;
-      gap: 1rem;
-    }
-
-    .gallery div {
-      background-color: #c8bfae;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gallery div::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.25), transparent 60%);
-    }
-
-    .gallery .photo1 { background-image: url('images/photo1.jpeg'); grid-row: span 2; }
-    .gallery .photo2 { background-image: url('images/photo2.jpeg'); }
-    .gallery .photo3 { background-image: url('images/photo3.jpeg'); }
-    .gallery .photo4 { background-image: url('images/photo4.jpeg'); grid-column: span 2; }
 
     .info-grid {
       display: grid;
@@ -529,12 +477,6 @@
 
     .cabin-main-content.hidden {
         display: none;
-    }
-
-    .details-tabs {
-      display: flex;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
     }
 
     .tab-btn {
@@ -913,12 +855,67 @@
 
     <div class="cabin-slide">
       <div class="cabin-info" style="--cabin-bg: url('images/updating.jpeg');">
-        <div class="eyebrow">Kempings Emzē · Jauns namiņš</div>
-        <h1>Updating namiņš</h1>
-        <p>Šī sadaļa ir sagatavota nākamajam namiņam. Te vēlāk varēs pievienot aprakstu, cenu, ērtības, foto un rezervācijas informāciju.</p>
-        <div class="button-group">
-          <a class="btn" href="#contact">Jautāt par pieejamību</a>
-          <a class="btn outline" href="#gallery">Skatīt galeriju</a>
+
+        <div class="cabin-main-content updating-main-content">
+          <div class="eyebrow">Kempings Emzē · Jauns namiņš</div>
+
+          <h1>Updating namiņš</h1>
+
+          <p>
+            Šī sadaļa ir sagatavota nākamajam namiņam.
+            Te vēlāk varēs pievienot aprakstu, cenu,
+            ērtības, foto un rezervācijas informāciju.
+          </p>
+
+          <div class="button-group">
+            <a class="btn" href="#contact">Rezervēt</a>
+
+            <button class="btn outline" type="button" onclick="toggleUpdatingDetails()">
+              Apskatīt namiņu
+            </button>
+          </div>
+        </div>
+
+        <div class="cabin-details" id="updatingDetails">
+
+          <div class="details-header">
+            Kempings Emzē · Gulbene · Updating namiņš
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>--</strong>
+              <span>Drīzumā</span>
+            </div>
+
+            <div class="stat">
+              <strong>NEW</strong>
+              <span>Jauns namiņš</span>
+            </div>
+
+            <div class="stat">
+              <strong>2026</strong>
+              <span>Atvēršana</span>
+            </div>
+          </div>
+
+          <div class="details-tabs">
+            <button class="tab-btn" type="button" onclick="closeUpdatingDetails()">
+              Updating namiņš
+            </button>
+
+            <button class="tab-btn active" type="button">
+              Info
+            </button>
+          </div>
+
+          <div class="tab-content active">
+            <p>
+              Šobrīd tiek veidota jaunā namiņa sadaļa.
+              Drīzumā būs pieejama pilna informācija,
+              galerija un rezervācijas iespējas.
+            </p>
+          </div>
         </div>
       </div>
       <div class="cabin-preview" style="--preview-bg: url('images/hero.jpeg');">
@@ -1063,6 +1060,11 @@
       mainContent.classList.toggle('hidden');
     }
 
+    function toggleUpdatingDetails() {
+      document.getElementById('updatingDetails').classList.toggle('active');
+      document.querySelector('.updating-main-content').classList.toggle('hidden');
+    }
+
     const cabinPhotos = [
       'images/photo1.jpeg',
       'images/photo2.jpeg',
@@ -1088,6 +1090,11 @@
       document.querySelector('.cabin-main-content').classList.remove('hidden');
     }
 
+    function closeUpdatingDetails() {
+      document.getElementById('updatingDetails').classList.remove('active');
+      document.querySelector('.updating-main-content').classList.remove('hidden');
+    }
+    
     function changeCabinPhoto(direction) {
       currentCabinPhoto = (currentCabinPhoto + direction + cabinPhotos.length) % cabinPhotos.length;
 
